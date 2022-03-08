@@ -39,8 +39,7 @@ while(1):
         img2 = cv.rectangle(frame, (x,y), (x+w,y+h), 255,2)
         cv.imshow('img2',img2)
         k = cv.waitKey(30) & 0xff
-        
-        if k == 27:
+        if k == 115:
             break
     
     else:

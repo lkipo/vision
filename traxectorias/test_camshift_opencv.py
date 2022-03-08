@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser(description='This sample demonstrates the camsh
                                               The example file can be downloaded from: \
                                               https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4')
 parser.add_argument('image', type=str, help='path to image file')
+
 args = parser.parse_args()
 cap = cv.VideoCapture(args.image)
 
@@ -28,7 +29,7 @@ term_crit = ( cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 1 )
 while(1):
     
     ret, frame = cap.read()
-    if ret == True:
+    if ret(2) > 5:
         hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         dst = cv.calcBackProject([hsv],[0],roi_hist,[0,180],1)
 
@@ -41,6 +42,8 @@ while(1):
         img2 = cv.polylines(frame,[pts],True, 255,2)
         cv.imshow('img2',img2)
         k = cv.waitKey(30) & 0xff
+
+        print(ret)
         if k == 115:
             break
     else:
