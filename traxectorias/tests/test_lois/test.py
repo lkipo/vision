@@ -1,13 +1,7 @@
 import numpy as np
 import cv2 as cv
-import argparse
-parser = argparse.ArgumentParser(description='This sample demonstrates the camshift algorithm. \
-                                              The example file can be downloaded from: \
-                                              https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4')
-parser.add_argument('image', type=str, help='path to image file')
 
-args = parser.parse_args()
-cap = cv.VideoCapture(args.image)
+cap = cv.VideoCapture(0)
 
 # take first frame of the video
 ret,frame = cap.read()
@@ -29,7 +23,8 @@ term_crit = ( cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 1 )
 while(1):
     
     ret, frame = cap.read()
-    if ret(2) > 5:
+    frame=cv.resize(frame,(1600,1200))
+    if ret:
         hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         dst = cv.calcBackProject([hsv],[0],roi_hist,[0,180],1)
 

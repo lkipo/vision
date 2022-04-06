@@ -2,30 +2,32 @@ import cv2 as cv
 import argparse
 import numpy as np
 
-parser = argparse.ArgumentParser(description="C")
-parser.add_argument('-l', '--initial_location', action='store')
-parser.set_defaults(initial_location = '')
-options = parser.parse_args()
+# parser = argparse.ArgumentParser(description="C")
+# parser.add_argument('-l', '--initial_location', action='store')
+# parser.set_defaults(initial_location = '')
+# options = parser.parse_args()
 
-global location
+# global location
+# camshift_bool = False
+# MOG2_bool = True
 
-if not(options.initial_location == ''):
-    print(options)
-    x, y, w, h = eval(str(options.initial_location))
-    print(x)
-    print(y)
-    print(w)
-    print(h)
-    location = True
+# if not(options.initial_location == ''):
+#     print(options)
+#     x, y, w, h = eval(str(options.initial_location))
+#     print(x)
+#     print(y)
+#     print(w)
+#     print(h)
+#     location = True
 
 # Cambiar esto ↓
+x, y, w, h = (400, 400, 50, 50)
 track_window = (x, y, w, h)
 
-cap = cv.VideoCapture(0)
-
+cap = cv.VideoCapture('/home/lkipo/Codigo/vision/drone/helicopter.mp4')
 ret, frame = cap.read()
 
-# Desde aqui ata a 33 está copiado xd
+# Estas 5 lineas estan copiadas xd
 roi = frame[y:y+h, x:x+w]
 hsv_roi =  cv.cvtColor(roi, cv.COLOR_BGR2HSV)
 mask = cv.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
